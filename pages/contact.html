@@ -1,19 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <header></header>
-    <nav></nav>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Import de las fuentes de Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <header class="header"><nav></nav></header>
     <main>
-        <form>
-            <label for=""></label>
-        </form>
+      <form class="form" action="https://formspree.io/f/manwnwny" method="POST">
+        <div class="form__field">
+          <label class="form__label" for="name">Nombre</label>
+          <input
+            class="form__input"
+            type="text"
+            name="name"
+            id="name"
+            autocomplete="name"
+            placeholder="Ej: Luis Rodriguez"
+            aria-required="true"
+            aria-invalid="false"
+            aria-errormessage="name-error"
+          />
+        </div>
+
+        <div class="form__field">
+          <label class="form__label" for="email">Email</label>
+          <input
+            class="form__input"
+            type="email"
+            name="email"
+            id="email"
+            autocomplete="email"
+            placeholder="luisrodriguez@gmail.com"
+            aria-required="true"
+            aria-invalid="false"
+            aria-errormessage="email-error"
+          />
+        </div>
+
+        <div class="form__field">
+          <label class="form__label" for="message">Mensaje</label>
+          <textarea
+            class="form__textarea"
+            name="message"
+            id="message"
+            placeholder=""
+            aria-required="true"
+            aria-invalid="false"
+            aria-errormessage="message-error"
+          ></textarea>
+        </div>
+
+        <button class="form__submit" type="submit">Enviar</button>
+      </form>
     </main>
     <section></section>
     <footer></footer>
-</body>
+  </body>
 </html>
