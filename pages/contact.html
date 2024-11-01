@@ -26,76 +26,89 @@
   </head>
 
   <body>
-    <header class="header">
-      <nav class="header__nav">
-        <ul class="header__list">
-          <li class="header__item">
-            <a class="header__link" href="../index.html">Inicio</a>
-          </li>
-          <li class="header__item">
-            <a class="header__link" href="../index.html#productos">Productos</a>
-          </li>
-          <li class="header__item">
-            <a class="header__link" href="./reviews.html">Reseñas</a>
-          </li>
-          <li class="header__item">
-            <a class="header__link" href="./contact.html">Contacto</a>
-          </li>
-        </ul>
-      </nav>
+    <div class="container">
+      <header class="header">
+        <nav class="header__nav">
+          <ul class="header__list">
+            <li class="header__item">
+              <a class="header__link" href="../index.html">Inicio</a>
+            </li>
+            <li class="header__item">
+              <a class="header__link" href="../index.html#productos"
+                >Productos</a
+              >
+            </li>
+            <li class="header__item">
+              <a class="header__link" href="./reviews.html#reviews">Reseñas</a>
+            </li>
+            <li class="header__item">
+              <a class="header__link" href="./contact.html">Contacto</a>
+            </li>
+            <li class="header__item">
+              <a class="header__link" href="#">
+                <i class="fas fa-shopping-cart"></i> Carrito
+              </a>
+            </li>
+          </ul>
+        </nav>
 
-      <h1>Contacto</h1>
-    </header>
+        <h1 class="h1">Contacto</h1>
+      </header>
 
-    <main>
-      <form class="form" action="https://formspree.io/f/manwnwny" method="POST">
-        <div class="form__field">
-          <label class="form__label" for="name">Nombre</label>
-          <input
-            class="form__input"
-            type="text"
-            name="name"
-            id="name"
-            autocomplete="name"
-            placeholder="Ej: Luis Rodriguez"
-            aria-required="true"
-            aria-invalid="false"
-            aria-errormessage="name-error"
-          />
-        </div>
+      <main class="main">
+        <form
+          class="form"
+          action="https://formspree.io/f/manwnwny"
+          method="POST"
+        >
+          <div class="form__field">
+            <label class="form__label" for="name">Nombre</label>
+            <input
+              class="form__input"
+              type="text"
+              name="name"
+              id="name"
+              autocomplete="name"
+              placeholder="Ej: Luis Rodriguez"
+              aria-required="true"
+              aria-invalid="false"
+              aria-errormessage="name-error"
+            />
+          </div>
 
-        <div class="form__field">
-          <label class="form__label" for="email">Email</label>
-          <input
-            class="form__input"
-            type="email"
-            name="email"
-            id="email"
-            autocomplete="email"
-            placeholder="luisrodriguez@gmail.com"
-            aria-required="true"
-            aria-invalid="false"
-            aria-errormessage="email-error"
-          />
-        </div>
+          <div class="form__field">
+            <label class="form__label" for="email">Email</label>
+            <input
+              class="form__input"
+              type="email"
+              name="email"
+              id="email"
+              autocomplete="email"
+              placeholder="luisrodriguez@gmail.com"
+              aria-required="true"
+              aria-invalid="false"
+              aria-errormessage="email-error"
+            />
+          </div>
 
-        <div class="form__field">
-          <label class="form__label" for="message">Mensaje</label>
-          <textarea
-            class="form__textarea"
-            name="message"
-            id="message"
-            placeholder=""
-            aria-required="true"
-            aria-invalid="false"
-            aria-errormessage="message-error"
-          ></textarea>
-        </div>
+          <div class="form__field">
+            <label class="form__label" for="message">Mensaje</label>
+            <textarea
+              class="form__textarea"
+              name="message"
+              id="message"
+              placeholder="Tengo dudas con acerca de este producto... Quiero detalles..."
+              aria-required="true"
+              aria-invalid="false"
+              aria-errormessage="message-error"
+            ></textarea>
+          </div>
 
-        <button class="form__submit" type="submit">Enviar</button>
-      </form>
-    </main>
-    <section></section>
-    <footer></footer>
+          <button class="form__submit" type="submit">Enviar</button>
+        </form>
+      </main>
+      <section></section>
+      <footer class="footer"></footer>
+    </div>
   </body>
 </html>
