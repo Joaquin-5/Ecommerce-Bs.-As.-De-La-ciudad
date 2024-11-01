@@ -14,21 +14,54 @@
       rel="stylesheet"
     />
 
+    <!-- Import de Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
     <link rel="stylesheet" href="./css/style.css" />
   </head>
+
   <body>
-    <header>
-      <nav>
-        <ul>
-          <li><a href="./index.html">Inicio</a></li>
-          <li><a href="./index.html#products">Productos</a></li>
-          <li><a href="./pages/reviews.html">Reseñas</a></li>
-          <li><a href="./pages/contact.html">Contacto</a></li>
+    <header class="header">
+      <nav class="header__nav">
+        <ul class="header__list">
+          <li class="header__item">
+            <a class="header__link" href="./index.html">Inicio</a>
+          </li>
+          <li class="header__item">
+            <a class="header__link" href="./index.html#products">Productos</a>
+          </li>
+          <li class="header__item">
+            <a class="header__link" href="./pages/reviews.html">Reseñas</a>
+          </li>
+          <li class="header__item">
+            <a class="header__link" href="./pages/contact.html">Contacto</a>
+          </li>
         </ul>
       </nav>
+
+      <h1>Página principal</h1>
     </header>
 
-    <main><section id="products"></section></main>
+    <main>
+      <section id="products">
+        <article class="product-card">
+          <img src="#" alt="Nombre del producto" class="product-card__image" />
+          <h2 class="product-card__title">Nombre del Producto</h2>
+          <p class="product-card__description">
+            Descripción breve del producto.
+          </p>
+          <span class="product-card__price">$Precio</span>
+          <button class="product-card__button">
+            <i class="fas fa-shopping-cart"></i> Añadir al carrito
+          </button>
+        </article>
+      </section>
+    </main>
     <footer></footer>
   </body>
 </html>
