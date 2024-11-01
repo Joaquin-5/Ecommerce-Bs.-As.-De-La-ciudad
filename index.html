@@ -1,15 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <header></header>
-    <nav></nav>
-    <main></main>
-    <section></section>
-    <footer></footer>
-</body>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Import de las fuentes de Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Import de Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <header class="header">
+        <nav class="header__nav">
+          <ul class="header__list">
+            <li class="header__item">
+              <a class="header__link" href="./index.html">Inicio</a>
+            </li>
+            <li class="header__item">
+              <a class="header__link" href="./index.html#products">Productos</a>
+            </li>
+            <li class="header__item">
+              <a class="header__link" href="./pages/reviews.html#reviews"
+                >Reseñas</a
+              >
+            </li>
+            <li class="header__item">
+              <a class="header__link" href="./pages/contact.html">Contacto</a>
+            </li>
+            <li class="header__item">
+              <a class="header__link" href="#">
+                <i class="fas fa-shopping-cart"></i> Carrito
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <h1 class="h1">Página principal</h1>
+      </header>
+
+      <main class="main main--home">
+        <section id="products" class="products">
+          <article class="product-card">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy_BABxAmhkZntIHjimb3Ax2n5-OP4XXiaZA&s"
+              alt="Nombre del producto"
+              class="product-card__image"
+            />
+            <h2 class="product-card__title">Nombre del Producto</h2>
+            <p class="product-card__description">
+              Descripción breve del producto.
+            </p>
+            <span class="product-card__price">$Precio</span>
+            <button class="product-card__button">
+              <i class="fas fa-shopping-cart"></i> Añadir al carrito
+            </button>
+          </article>
+          <article class="product-card">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy_BABxAmhkZntIHjimb3Ax2n5-OP4XXiaZA&s"
+              alt="Nombre del producto"
+              class="product-card__image"
+            />
+            <h2 class="product-card__title">Nombre del Producto</h2>
+            <p class="product-card__description">
+              Descripción breve del producto.
+            </p>
+            <span class="product-card__price">$Precio</span>
+            <button class="product-card__button">
+              <i class="fas fa-shopping-cart"></i> Añadir al carrito
+            </button>
+          </article>
+          <article class="product-card">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy_BABxAmhkZntIHjimb3Ax2n5-OP4XXiaZA&s"
+              alt="Nombre del producto"
+              class="product-card__image"
+            />
+            <h2 class="product-card__title">Nombre del Producto</h2>
+            <p class="product-card__description">
+              Descripción breve del producto.
+            </p>
+            <span class="product-card__price">$Precio</span>
+            <button class="product-card__button">
+              <i class="fas fa-shopping-cart"></i> Añadir al carrito
+            </button>
+          </article>
+          <article class="product-card">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy_BABxAmhkZntIHjimb3Ax2n5-OP4XXiaZA&s"
+              alt="Nombre del producto"
+              class="product-card__image"
+            />
+            <h2 class="product-card__title">Nombre del Producto</h2>
+            <p class="product-card__description">
+              Descripción breve del producto.
+            </p>
+            <span class="product-card__price">$Precio</span>
+            <button class="product-card__button">
+              <i class="fas fa-shopping-cart"></i> Añadir al carrito
+            </button>
+          </article>
+          <article class="product-card">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy_BABxAmhkZntIHjimb3Ax2n5-OP4XXiaZA&s"
+              alt="Nombre del producto"
+              class="product-card__image"
+            />
+            <h2 class="product-card__title">Nombre del Producto</h2>
+            <p class="product-card__description">
+              Descripción breve del producto.
+            </p>
+            <span class="product-card__price">$Precio</span>
+            <button class="product-card__button">
+              <i class="fas fa-shopping-cart"></i> Añadir al carrito
+            </button>
+          </article>
+          <article class="product-card">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy_BABxAmhkZntIHjimb3Ax2n5-OP4XXiaZA&s"
+              alt="Nombre del producto"
+              class="product-card__image"
+            />
+            <h2 class="product-card__title">Nombre del Producto</h2>
+            <p class="product-card__description">
+              Descripción breve del producto.
+            </p>
+            <span class="product-card__price">$Precio</span>
+            <button class="product-card__button">
+              <i class="fas fa-shopping-cart"></i> Añadir al carrito
+            </button>
+          </article>
+          <article class="product-card">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy_BABxAmhkZntIHjimb3Ax2n5-OP4XXiaZA&s"
+              alt="Nombre del producto"
+              class="product-card__image"
+            />
+            <h2 class="product-card__title">Nombre del Producto</h2>
+            <p class="product-card__description">
+              Descripción breve del producto.
+            </p>
+            <span class="product-card__price">$Precio</span>
+            <button class="product-card__button">
+              <i class="fas fa-shopping-cart"></i> Añadir al carrito
+            </button>
+          </article>
+        </section>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+  </body>
 </html>
