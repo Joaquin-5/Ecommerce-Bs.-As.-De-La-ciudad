@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   height: 100%;
@@ -19,14 +23,21 @@ body {
   gap: 20px;
 }
 
+.header {
+  position: relative;
+}
+
 .header__list {
   display: flex;
   flex-direction: column;
+  align-items: start;
+  gap: 10px;
 }
 
 .header__item {
   list-style: none;
   font-weight: 600;
+  font-size: 20px;
 }
 
 .header__link {
@@ -54,7 +65,7 @@ body {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 40px;
 }
 
 .product-card {
@@ -98,6 +109,41 @@ body {
   display: flex;
   justify-content: center;
   gap: 12px;
+}
+
+/* Reseñas */
+.reviews__container {
+  display: grid;
+  justify-content: center;
+  gap: 40px;
+}
+
+.review-card {
+  width: 320px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 0;
+}
+
+.review-card__container,
+.review-card__info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.review-card__avatar {
+  width: 200px;
+}
+
+.review-card__text,
+.review-card__rate {
+  text-align: center;
+}
+
+.checked {
+  color: #f39c12;
 }
 
 .form,
@@ -164,13 +210,15 @@ body {
     gap: 12px;
   }
 
-  .product-card {
+  .product-card,
+  .review-card {
     transform: scale(1);
     transition: transform 0.8s;
     will-change: transform;
   }
 
-  .product-card:hover {
+  .product-card:hover,
+  .review-card:hover {
     transform: scale(1.05);
   }
 
@@ -180,6 +228,11 @@ body {
 
   .product-card__button:hover {
     background-color: #0355ac;
+  }
+
+  .reviews__container {
+    grid-template-columns: repeat(4, 1fr);
+    margin: 0 40px;
   }
 
   .form {
