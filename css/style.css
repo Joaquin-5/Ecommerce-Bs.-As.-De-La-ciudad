@@ -72,7 +72,7 @@ body {
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 16px;
-  width: 250px;
+  width: 350px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -193,6 +193,16 @@ body {
   cursor: pointer;
   padding: 12px 6px;
   font-weight: 500;
+}
+
+/* cart */
+.cart-image {
+  width: 100px;
+}
+
+.trash-icon {
+  color: rgb(165, 24, 24);
+  cursor: pointer;
 }
 
 .footer {
