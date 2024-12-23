@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -31,7 +31,6 @@
 
     <link rel="stylesheet" href="../css/style.css" />
   </head>
-
   <body>
     <div class="container-fluid p-0">
       <header class="header">
@@ -62,12 +61,12 @@
                   >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="../index.html#products">Productos</a>
+                  <a class="nav-link" href="../index.html#products"
+                    >Productos</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="./reviews.html#reviews"
-                    >Reseñas</a
-                  >
+                  <a class="nav-link" href="./reviews.html#reviews">Reseñas</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="./contact.html">Contacto</a>
@@ -82,67 +81,16 @@
           </div>
         </nav>
 
-        <h1 class="h1">Contacto</h1>
+        <h1 class="h1">Lista de productos en el carrito</h1>
       </header>
 
-      <main class="main">
-        <form
-          class="form"
-          id="form"
-          action="https://formspree.io/f/manwnwny"
-          method="POST"
-        >
-          <div class="form__field">
-            <label class="form__label" for="name">Nombre</label>
-            <input
-              class="form__input"
-              type="text"
-              name="name"
-              id="name"
-              autocomplete="name"
-              placeholder="Ex: Luis Rodriguez"
-              aria-required="true"
-              aria-invalid="false"
-              aria-errormessage="name-error"
-              required
-            />
-          </div>
-
-          <div class="form__field">
-            <label class="form__label" for="email">Email</label>
-            <input
-              class="form__input"
-              type="email"
-              name="email"
-              id="email"
-              autocomplete="email"
-              placeholder="Ex: luisrodriguez@gmail.com"
-              aria-required="true"
-              aria-invalid="false"
-              aria-errormessage="email-error"
-              required
-            />
-          </div>
-
-          <div class="form__field">
-            <label class="form__label" for="message">Mensaje</label>
-            <textarea
-              class="form__textarea"
-              name="message"
-              id="message"
-              placeholder="Ex: Tengo dudas con acerca de este producto... Quiero detalles..."
-              aria-required="true"
-              aria-invalid="false"
-              aria-errormessage="message-error"
-              required
-            ></textarea>
-          </div>
-
-          <button class="form__submit" type="submit">Enviar</button>
-        </form>
+      <main class="main main--cart">
+        <section id="cart" class="cart">
+          <table class="table">
+            <tbody class="tbody"></tbody>
+          </table>
+        </section>
       </main>
-      <section></section>
-      <footer class="footer"></footer>
     </div>
 
     <!-- Js de Bootstrap -->
