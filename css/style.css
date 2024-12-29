@@ -197,12 +197,21 @@ body {
 
 /* cart */
 .cart-image {
-  width: 100px;
+  max-width: 80px;
+  max-height: 80px;
+  object-fit: cover;
+}
+
+.empty-cart-message {
+  text-align: center;
+  font-style: italic;
+  color: gray;
 }
 
 .trash-icon {
   color: rgb(165, 24, 24);
   cursor: pointer;
+  font-size: 25px;
 }
 
 .footer {
