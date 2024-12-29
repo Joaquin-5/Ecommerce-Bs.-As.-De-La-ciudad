@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const productsSection = document.querySelector(".products");
   const cartSection = document.querySelector(".cart");
   const row = document.querySelector(".tbody");
-  const deleteButton = document.querySelector(".trash-icon");
   let cart = JSON.parse(localStorage.getItem("carrito")) || [];
 
   async function getData(id = null) {
@@ -67,43 +66,67 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function getProductsFromCart() {
     console.log(cart);
-    if (cart.length === 0) return;
+    row.innerHTML = "";
+
+    if (cart.length === 0) {
+      row.innerHTML = `
+        <tr>
+          <td colspan="3" class="empty-cart-message">
+            No hay productos en el carrito.
+          </td>
+        </tr>`;
+      return;
+    }
 
     cart.forEach(async (productId) => {
       const product = await getData(productId);
       console.log(product);
-      row.innerHTML += 
-        `<tr>
-          <td>${product.title}</td>
-          <td>
+      row.innerHTML += `<tr>
+          <td class="w-33">${product.title}</td>
+          <td class="w-33">
             <img
               src="${product.image}"
               alt="${product.category}"
               class="cart-image"
             />
-          </td>
-          <td><i class="fa-solid fa-trash-can trash-icon" data-id="${product.id}"></i></td>
+          </td> 
+          <td class="w-33">$${product.price}</td>
+          <td class="w-33"><i class="fa-solid fa-trash-can trash-icon" data-id="${product.id}"></i></td>
         </tr>`;
-
-        /* deleteButton.addEventListener("click", () => {
-          removeProductFromCart(product.id);
-        }); */
     });
   }
 
   function removeProductFromCart(productId) {
-    const response = confirm("¿Estás seguro que deseas eliminar este producto?");
+    const response = confirm(
+      "¿Estás seguro que deseas eliminar este producto del carrito?"
+    );
 
-    if(response) {
+    if (response) {
+      // Se filtra el producto a eliminar. Devuelve un nuevo arreglo con los elementos distintos al id del producto a eliminar
+      cart = cart.filter((id) => id !== productId);
 
+      // "cart" es un nuevo arreglo sin ese id y se guarda este nuevo arreglo en localstorage. De esta manera
+      localStorage.setItem("carrito", JSON.stringify(cart));
+      console.log(`Producto ${productId} eliminado del carrito.`);
+
+      // Se reutiliza la función para volver a imprimir los productos actualizados
+      getProductsFromCart();
     }
   }
 
-  
+  if (row) {
+    row.addEventListener("click", (e) => {
+      if (e.target.classList.contains("trash-icon")) {
+        const productId = e.target.dataset.id;
+        removeProductFromCart(productId);
+      }
+    });
+  }
+
   if (productsSection) {
     displayProducts();
   }
-  
+
   if (cartSection) {
     getProductsFromCart();
   }
