@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function removeProductFromCart(productId) {
     const response = confirm(
-      "¿Estás seguro que deseas eliminar este producto?"
+      "¿Estás seguro que deseas eliminar este producto del carrito?"
     );
 
     if (response) {
@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("carrito", JSON.stringify(cart));
       console.log(`Producto ${productId} eliminado del carrito.`);
 
-      // Se reutiliza la función
+      // Se reutiliza la función para volver a imprimir los productos actualizados
       getProductsFromCart();
     }
   }
