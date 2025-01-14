@@ -2,7 +2,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const productsSection = document.querySelector(".products");
   const cartSection = document.querySelector(".cart");
   const row = document.querySelector(".tbody");
+  const cartLinkCounter = document.querySelector(".c-cartLink__counter");
+  const navLinks = document.querySelectorAll(".nav-link");
   let cart = JSON.parse(localStorage.getItem("carrito")) || [];
+
+  const currentPath = window.location.pathname;
+
+  navLinks.forEach((link) => {
+    const linkPath = new URL(link.href).pathname;
+
+    if (linkPath === currentPath) link.classList.add("active");
+    else link.classList.remove("active");
+  });
 
   async function getData(id = null) {
     const response =
@@ -19,22 +30,40 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await getData();
 
       data.forEach((product) => {
+        console.log(product.id);
+        const buttonText = cart.includes(JSON.parse(product.id))
+          ? "Agregado"
+          : "Agregar al carrito";
+        const buttonClass = cart.includes(product.id)
+          ? "btn-added"
+          : "btn-primary";
+
+        let buttonIcon = `
+          <i class="fas fa-shopping-cart"></i>
+        `;
+
+        if (cart.includes(product.id)) {
+          buttonIcon = `
+            <i class="fa-regular fa-circle-check"></i>
+          `;
+        }
+
         productsSection.innerHTML += `
-        <article class="product-card" data-id="${product.id}">
-          <img
-            src="${product.image}"
-            alt="${product.category}"
-            class="product-card__image"
-          />
-          <h2 class="product-card__title">${product.title}</h2>
-          <p class="product-card__description">
-            ${product.description}
-          </p>
-          <span class="product-card__price">$${product.price}</span>
-          <button class="product-card__button">
-            <i class="fas fa-shopping-cart"></i> Añadir al carrito
-          </button>
-        </article>
+          <article class="product-card" data-id="${product.id}">
+            <img
+              src="${product.image}"
+              alt="${product.category}"
+              class="product-card__image"
+            />
+            <h2 class="product-card__title">${product.title}</h2>
+            <p class="product-card__description">
+              ${product.description}
+            </p>
+            <span class="product-card__price">$${product.price}</span>
+            <button class="product-card__button ${buttonClass}">
+              ${buttonIcon} ${buttonText}
+            </button>
+          </article>
         `;
       });
 
@@ -59,6 +88,23 @@ document.addEventListener("DOMContentLoaded", () => {
       cart.push(productId);
       localStorage.setItem("carrito", JSON.stringify(cart));
       console.log(`Producto ${productId} agregado al carrito`);
+      Toastify({
+        text: "Producto agregado al carrito con éxito",
+        duration: -1,
+        close: false,
+        avatar: "../assets/img/checkicon.png",
+        gravity: "bottom",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "#ffffff",
+          color: "#000000",
+          display: "flex",
+          alignItems: "center",
+          gap: "10px",
+          padding: "20px 10px",
+        },
+      }).showToast();
     } else {
       console.log(`Producto ${productId} ya está en el carrito`);
     }
@@ -91,6 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
             />
           </td> 
           <td class="w-33">$${product.price}</td>
+          <td class="w-33"><input type="number" min="1" max="20" value="1"/></td>
           <td class="w-33"><i class="fa-solid fa-trash-can trash-icon" data-id="${product.id}"></i></td>
         </tr>`;
     });
@@ -129,6 +176,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (cartSection) {
     getProductsFromCart();
+  }
+
+  if (cartLinkCounter) {
+    cartLinkCounter.textContent = cart.length;
   }
 
   /* if (document.URL.includes("contact.html")) {

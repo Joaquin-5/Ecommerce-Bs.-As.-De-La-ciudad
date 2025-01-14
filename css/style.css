@@ -49,8 +49,20 @@ body {
   color: #000;
 }
 
+.c-cartLink {
+  position: relative;
+}
+
+.c-cartLink__counter {
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 50%;
+  padding: 4px 8px;
+}
+
 .h1 {
   text-align: center;
+  margin: 40px 0;
 }
 
 .main {
@@ -100,15 +112,20 @@ body {
 }
 
 .product-card__button {
-  background-color: #007bff;
   color: white;
   border: none;
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
   gap: 12px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+}
+
+.btn-added {
+  background-color: #28a745;
 }
 
 /* Reseñas */
