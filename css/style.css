@@ -65,6 +65,27 @@ body {
   margin: 40px 0;
 }
 
+/* toastfy, mensajes */
+.tostify::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 5px;
+  background-color: #00BA00;
+  animation: anim 3s linear forwards;
+}
+
+@keyframes anim {
+  0% {
+    width: 100%;
+  }
+
+  100% {
+    width: 0;
+  }
+}
+
 .main {
   flex: 1;
 }
@@ -210,6 +231,11 @@ body {
   cursor: pointer;
   padding: 12px 6px;
   font-weight: 500;
+  transition: background-color 0.8s;
+}
+
+.form__submit:hover {
+  background-color: #afb4b9;
 }
 
 /* cart */
