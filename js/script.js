@@ -15,7 +15,10 @@ document.addEventListener("DOMContentLoaded", () => {
     else link.classList.remove("active");
   });
 
-  function toastifyNotification(message, image) {
+  function toastifyNotification(message, type = "success") {
+    const toastClass = type === "error" ? "tostify-error" : "tostify-success";
+    const image = type === "error" ? "../assets/img/erroricon.png" : "../assets/img/checkicon.png";
+
     Toastify({
       text: message,
       close: false,
@@ -23,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
       gravity: "top",
       position: "right",
       stopOnFocus: true,
-      className: "tostify",
+      className: `toastify ${toastClass}`,
       style: {
         background: "#ffffff",
         color: "#000000",
@@ -58,7 +61,9 @@ document.addEventListener("DOMContentLoaded", () => {
       data.forEach((product) => {
         const isInCart = cart.some((item) => item.id === product.id); // Verifica si el producto está en el carrito
 
-        const buttonText = isInCart ? "Agregado" : "Agregar al carrito";
+        const buttonText = isInCart
+          ? "Agregado al carrito"
+          : "Agregar al carrito";
         const buttonClass = isInCart ? "btn-added" : "btn-primary";
 
         let buttonIcon = isInCart
@@ -114,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
           // Actualiza el botón tras agregar el producto
           const isInCart = cart.some((item) => item.id === productId);
           if (isInCart) {
-            button.innerHTML = `<i class="fa-regular fa-circle-check"></i> Agregado`;
+            button.innerHTML = `<i class="fa-regular fa-circle-check"></i> Agregado al carrito`;
             button.classList.remove("btn-primary");
             button.classList.add("btn-added");
           }
@@ -136,20 +141,19 @@ document.addEventListener("DOMContentLoaded", () => {
       );
       const button = productCard.querySelector(".product-card__button");
       // Cambia el texto, ícono y clase del botón
-      button.innerHTML = `<i class="fa-regular fa-circle-check"></i> Agregado`;
+      button.innerHTML = `<i class="fa-regular fa-circle-check"></i> Agregado al carrito`;
       button.classList.remove("btn-primary");
       button.classList.add("btn-added");
       console.log(`Producto ${product.title} agregado al carrito.`);
       toastifyNotification(
-        "¡Producto agregado al carrito con éxito!",
-        "../assets/img/checkicon.png"
+        "¡Producto agregado al carrito con éxito!"
       );
       updateCartCounter();
     } else {
       console.log(`El producto con el id ${product.id} ya está en el carrito`);
       toastifyNotification(
         "¡Este producto ya está en el carrito!",
-        "../assets/img/erroricon.png"
+        "error"
       );
     }
   }
@@ -206,7 +210,6 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log(`Producto ${productId} eliminado del carrito.`);
       toastifyNotification(
         "¡Producto eliminado del carrito con éxito!",
-        "../assets/img/checkicon.png"
       );
 
       // Se reutiliza la función para volver a imprimir los productos actualizados

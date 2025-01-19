@@ -65,15 +65,22 @@ body {
   margin: 40px 0;
 }
 
-/* toastfy, mensajes */
-.tostify::after {
+/* toastfy, mensajes de notificación */
+.toastify::after {
   content: '';
   position: absolute;
   bottom: 0;
   left: 0;
   height: 5px;
-  background-color: #00BA00;
   animation: anim 3s linear forwards;
+}
+
+.tostify-success::after {
+  background-color: #00BA00;
+}
+
+.tostify-error::after {
+  background-color: #EC1B2E;
 }
 
 @keyframes anim {
@@ -288,8 +295,12 @@ body {
     transition: background-color 0.8s;
   }
 
-  .product-card__button:hover {
+  .btn-primary:hover {
     background-color: #0355ac;
+  }
+  
+  .btn-added:hover {
+    background-color: #1e7e34;
   }
 
   .reviews__container {
@@ -315,4 +326,4 @@ body {
 }
 
 @media (min-width: 1200px) {
-}
+} 
