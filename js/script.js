@@ -17,7 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function toastifyNotification(message, type = "success") {
     const toastClass = type === "error" ? "tostify-error" : "tostify-success";
-    const image = type === "error" ? "../assets/img/erroricon.png" : "../assets/img/checkicon.png";
+    const image =
+      type === "error"
+        ? "../assets/img/erroricon.png"
+        : "../assets/img/checkicon.png";
 
     Toastify({
       text: message,
@@ -95,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
       productButtons.forEach((button) => {
         button.addEventListener("click", (e) => {
           const productCard = e.target.closest(".product-card");
-          const productId = productCard.getAttribute("data-id");
+          const productId = parseInt(productCard.getAttribute("data-id"));
           const productTitle = productCard.querySelector(
             ".product-card__title"
           ).textContent;
@@ -131,30 +134,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function addProductToCart(product) {
-    console.log(product);
-
     if (!cart.some((item) => item.id === product.id)) {
       cart.push(product);
       localStorage.setItem("carrito", JSON.stringify(cart));
-      const productCard = document.querySelector(
-        `.product-card[data-id="${product.id}"]`
-      );
-      const button = productCard.querySelector(".product-card__button");
-      // Cambia el texto, ícono y clase del botón
-      button.innerHTML = `<i class="fa-regular fa-circle-check"></i> Agregado al carrito`;
-      button.classList.remove("btn-primary");
-      button.classList.add("btn-added");
-      console.log(`Producto ${product.title} agregado al carrito.`);
-      toastifyNotification(
-        "¡Producto agregado al carrito con éxito!"
-      );
+      toastifyNotification("¡Producto agregado al carrito con éxito!");
       updateCartCounter();
     } else {
-      console.log(`El producto con el id ${product.id} ya está en el carrito`);
-      toastifyNotification(
-        "¡Este producto ya está en el carrito!",
-        "error"
-      );
+      toastifyNotification("¡Este producto ya está en el carrito!", "error");
     }
   }
 
@@ -208,9 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // "cart" es un nuevo arreglo sin ese id y se guarda este nuevo arreglo en localstorage.
       localStorage.setItem("carrito", JSON.stringify(cart));
       console.log(`Producto ${productId} eliminado del carrito.`);
-      toastifyNotification(
-        "¡Producto eliminado del carrito con éxito!",
-      );
+      toastifyNotification("¡Producto eliminado del carrito con éxito!");
 
       // Se reutiliza la función para volver a imprimir los productos actualizados
       getProductsFromCart();
