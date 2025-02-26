@@ -246,6 +246,11 @@ body {
 }
 
 /* cart */
+.main--cart {
+  display: flex;
+  flex-direction: column;
+}
+
 .cart-image {
   max-width: 80px;
   max-height: 80px;
@@ -316,6 +321,16 @@ body {
   .form__submit {
     width: 180px;
     align-self: flex-end;
+  }
+
+  /* cart */
+  .main--cart {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .cart {
+    width: 80%;
   }
 }
 

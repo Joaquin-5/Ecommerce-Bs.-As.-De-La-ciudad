@@ -1,9 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const productsSection = document.querySelector(".products");
-  const cartSection = document.querySelector(".cart");
-  const row = document.querySelector(".tbody");
-  const cartLinkCounter = document.querySelector(".c-cartLink__counter");
   const navLinks = document.querySelectorAll(".nav-link");
+  const productsSection = document.querySelector(".products");
+  const contactForm = document.querySelector(".form");
+  const row = document.querySelector(".tbody");
+  const cartSection = document.querySelector(".cart");
+  const cartLinkCounter = document.querySelector(".c-cartLink__counter");
   let cart = JSON.parse(localStorage.getItem("carrito")) || [];
 
   const currentPath = window.location.pathname;
@@ -54,6 +55,10 @@ document.addEventListener("DOMContentLoaded", () => {
     return data;
   }
 
+  function isProductInCart(productId) {
+    return cart.some((item) => item.id === productId);
+  }
+
   async function displayProducts() {
     try {
       const data = await getData();
@@ -62,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
       productsSection.innerHTML = "";
 
       data.forEach((product) => {
-        const isInCart = cart.some((item) => item.id === product.id); // Verifica si el producto está en el carrito
+        const isInCart = isProductInCart(product.id); // Verifica si el producto está en el carrito
 
         const buttonText = isInCart
           ? "Agregado al carrito"
@@ -120,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
           addProductToCart(product);
 
           // Actualiza el botón tras agregar el producto
-          const isInCart = cart.some((item) => item.id === productId);
+          const isInCart = isProductInCart(productId);
           if (isInCart) {
             button.innerHTML = `<i class="fa-regular fa-circle-check"></i> Agregado al carrito`;
             button.classList.remove("btn-primary");
@@ -134,21 +139,40 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function addProductToCart(product) {
-    if (!cart.some((item) => item.id === product.id)) {
+    const existingProduct = cart.find((item) => item.id === product.id);
+
+    if (!existingProduct) {
+      product.quantity = 1; // Agrega cantidad inicial
       cart.push(product);
       localStorage.setItem("carrito", JSON.stringify(cart));
       toastifyNotification("¡Producto agregado al carrito con éxito!");
-      updateCartCounter();
     } else {
       toastifyNotification("¡Este producto ya está en el carrito!", "error");
     }
+
+    updateCartCounter();
+  }
+
+  function updateCartProductQuantity(productId, quantity) {
+    const product = cart.find((item) => item.id === productId);
+    if (product) {
+      product.quantity = quantity; // Actualiza la cantidad
+      localStorage.setItem("carrito", JSON.stringify(cart));
+      updateCartDisplay(); // Opcional: vuelve a renderizar la tabla del carrito
+    }
+  }
+
+  function calculateTotal() {
+    const total = cart.reduce(
+      (acc, product) => acc + product.price * product.quantity,
+      0
+    );
+    return total.toFixed(2); // Devuelve el total con 2 decimales
   }
 
   function getProductsFromCart() {
-    console.log(cart);
-    row.innerHTML = ""; // Limpia la tabla antes de renderizar
+    row.innerHTML = "";
 
-    // Si el carrito está vacío, muestra el mensaje
     if (cart.length === 0) {
       row.innerHTML = `
         <tr>
@@ -159,8 +183,9 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Itera sobre los productos en el carrito
     cart.forEach((product) => {
+      const subtotal = (product.price * product.quantity).toFixed(2); // Subtotal por producto
+
       row.innerHTML += `
         <tr>
           <td class="w-33">${product.title}</td>
@@ -179,6 +204,19 @@ document.addEventListener("DOMContentLoaded", () => {
             <i class="fa-solid fa-trash-can trash-icon" data-id="${product.id}"></i>
           </td>
         </tr>`;
+    });
+  }
+
+  if (currentPath.includes("cart.html") && row) {
+    row.addEventListener("input", (e) => {
+      if (e.target.classList.contains("product-quantity")) {
+        const productId = e.target.dataset.id;
+        const newQuantity = parseInt(e.target.value, 10);
+        if (newQuantity >= 1) {
+          updateCartProductQuantity(productId, newQuantity);
+          getProductsFromCart(); // Actualiza la vista
+        }
+      }
     });
   }
 
@@ -222,12 +260,4 @@ document.addEventListener("DOMContentLoaded", () => {
   if (cartLinkCounter) {
     cartLinkCounter.textContent = cart.length;
   }
-
-  /* if (document.URL.includes("contact.html")) {
-    const form = document.getElementById("form");
-    /* form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      console.log(e);
-    }); 
-  } */
 });
