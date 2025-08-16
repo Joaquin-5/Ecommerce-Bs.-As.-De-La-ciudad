@@ -5,7 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const row = document.querySelector(".tbody");
   const cartSection = document.querySelector(".cart");
   const cartLinkCounter = document.querySelector(".c-cartLink__counter");
-  let cart = JSON.parse(localStorage.getItem("carrito")) || [];
+  const totalPriceElement = document.querySelector("span.total");
+  let cart = JSON.parse(localStorage.getItem("carrito")) || []; 
 
   const currentPath = window.location.pathname;
 
@@ -154,20 +155,105 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateCartProductQuantity(productId, quantity) {
-    const product = cart.find((item) => item.id === productId);
+    const product = cart.find((item) => item.id === parseInt(productId)); // Asegúrate de parsear el ID si viene de un `dataset`
     if (product) {
       product.quantity = quantity; // Actualiza la cantidad
       localStorage.setItem("carrito", JSON.stringify(cart));
-      updateCartDisplay(); // Opcional: vuelve a renderizar la tabla del carrito
+      getProductsFromCart(); // Llama a esta función para que se redibuje el carrito y se actualice el total
     }
   }
 
   function calculateTotal() {
+    console.log("--- INICIANDO CÁLCULO DE TOTAL ---");
+    console.log(
+      "Estado actual del carrito (variable 'cart'):",
+      JSON.parse(JSON.stringify(cart))
+    ); // Copia profunda para ver el estado real
+
     const total = cart.reduce(
-      (acc, product) => acc + product.price * product.quantity,
-      0
+      (acc, product) => {
+        // Verificar si el producto o sus propiedades son undefined/null
+        if (!product) {
+          console.warn(
+            "Producto nulo o indefinido encontrado en el carrito. Saltando."
+          );
+          return acc;
+        }
+        if (product.price === undefined || product.price === null) {
+          console.error(
+            `ERROR: product.price es ${product.price} para el producto ID: ${
+              product.id || "N/A"
+            }, Título: ${product.title || "N/A"}.`
+          );
+          return acc; // Salta este producto problemático
+        }
+        if (product.quantity === undefined || product.quantity === null) {
+          console.error(
+            `ERROR: product.quantity es ${
+              product.quantity
+            } para el producto ID: ${product.id || "N/A"}, Título: ${
+              product.title || "N/A"
+            }.`
+          );
+          return acc; // Salta este producto problemático
+        }
+
+        // Logs detallados antes del parseo
+        console.log(`Producto ID: ${product.id || "N/A"}`);
+        console.log(
+          `  Precio original: '${
+            product.price
+          }' (Tipo: ${typeof product.price})`
+        );
+        console.log(
+          `  Cantidad original: '${
+            product.quantity
+          }' (Tipo: ${typeof product.quantity})`
+        );
+
+        // Intentar parsear a número. Esto es una capa de seguridad.
+        const precio = parseFloat(product.price);
+        const cantidad = parseInt(product.quantity, 10); // Siempre especificar la base 10
+
+        // Logs detallados después del parseo
+        console.log(`  Precio parseado: ${precio} (Tipo: ${typeof precio})`);
+        console.log(
+          `  Cantidad parseada: ${cantidad} (Tipo: ${typeof cantidad})`
+        );
+
+        // Verificar si el parseo resultó en NaN
+        if (isNaN(precio)) {
+          console.error(
+            `¡ERROR FATAL!: 'precio' es NaN después de parseFloat('${
+              product.price
+            }') para el producto ID: ${product.id || "N/A"}`
+          );
+          return acc; // No sumamos este producto, continuamos con el acumulador
+        }
+        if (isNaN(cantidad)) {
+          console.error(
+            `¡ERROR FATAL!: 'cantidad' es NaN después de parseInt('${
+              product.quantity
+            }') para el producto ID: ${product.id || "N/A"}`
+          );
+          return acc; // No sumamos este producto, continuamos con el acumulador
+        }
+
+        // Si llegamos aquí, precio y cantidad son números válidos
+        const subtotalProducto = precio * cantidad;
+        console.log(`  Subtotal de producto: ${subtotalProducto}`);
+        console.log(
+          `  Acumulador actual: ${acc}. Nuevo acumulador: ${
+            acc + subtotalProducto
+          }`
+        );
+
+        return acc + subtotalProducto;
+      },
+      0 // Valor inicial del acumulador. Es crucial que sea un número.
     );
-    return total.toFixed(2); // Devuelve el total con 2 decimales
+    console.log("--- FIN CÁLCULO DE TOTAL. Resultado:", total, "---");
+    return total;
   }
 
   function getProductsFromCart() {
@@ -205,6 +291,12 @@ document.addEventListener("DOMContentLoaded", () => {
           </td>
         </tr>`;
     });
+
+    if (totalPriceElement) {
+      // Asegura que el elemento exista en el DOM
+      const totalFinal = calculateTotal(); // 1. Llama a calculateTotal() para obtener el valor numérico
+      totalPriceElement.textContent = totalFinal.toFixed(2); // 2. Actualiza el DOM con el total formateado
+    }
   }
 
   if (currentPath.includes("cart.html") && row) {
