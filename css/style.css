@@ -10,17 +10,16 @@ html {
 }
 
 html,
-body {
+.body {
   height: 100%;
   margin: 0;
   font-family: "Roboto", sans-serif;
 }
 
-.container {
+.site-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  gap: 20px;
 }
 
 .header {
@@ -49,12 +48,54 @@ body {
   color: #000;
 }
 
+.c-cartLink {
+  position: relative;
+}
+
+.c-cartLink__counter {
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 50%;
+  padding: 4px 8px;
+}
+
 .h1 {
   text-align: center;
+  margin: 40px 0;
+}
+
+/* toastfy, mensajes de notificación */
+.toastify::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 5px;
+  width: 100%;
+  animation: anim 3s linear forwards;
+}
+
+.tostify-success::after {
+  background-color: #00ba00;
+}
+
+.tostify-error::after {
+  background-color: #ec1b2e;
+}
+
+@keyframes anim {
+  0% {
+    width: 100%;
+  }
+
+  100% {
+    width: 0;
+  }
 }
 
 .main {
   flex: 1;
+  padding-bottom: 100px;
 }
 
 .main--home {
@@ -100,15 +141,20 @@ body {
 }
 
 .product-card__button {
-  background-color: #007bff;
   color: white;
   border: none;
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
   gap: 12px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+}
+
+.btn-added {
+  background-color: #28a745;
 }
 
 /* Reseñas */
@@ -193,9 +239,19 @@ body {
   cursor: pointer;
   padding: 12px 6px;
   font-weight: 500;
+  transition: background-color 0.8s;
+}
+
+.form__submit:hover {
+  background-color: #afb4b9;
 }
 
 /* cart */
+.main--cart {
+  display: flex;
+  flex-direction: column;
+}
+
 .cart-image {
   max-width: 80px;
   max-height: 80px;
@@ -217,10 +273,10 @@ body {
 .footer {
   background-color: #007bff;
   height: 100px;
-  bottom: 0;
   color: #fff;
   text-align: center;
   padding: 10px;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
@@ -245,8 +301,12 @@ body {
     transition: background-color 0.8s;
   }
 
-  .product-card__button:hover {
+  .btn-primary:hover {
     background-color: #0355ac;
+  }
+
+  .btn-added:hover {
+    background-color: #1e7e34;
   }
 
   .reviews__container {
@@ -262,6 +322,16 @@ body {
   .form__submit {
     width: 180px;
     align-self: flex-end;
+  }
+
+  /* cart */
+  .main--cart {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .cart {
+    width: 80%;
   }
 }
 
